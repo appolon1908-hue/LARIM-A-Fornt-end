@@ -8,6 +8,9 @@ export interface BookingSummary {
   id:string; booking_number:string; customer_id:string; market_code:string; status:string;
   currency:string; customer_total_minor:number; version:number; scheduled_start:string; scheduled_end:string;
 }
+export interface CatalogServiceSummary {
+  code:string; name:Record<string,string>; duration_minutes:number
+}
 export interface CommandOptions { idempotencyKey?:string; ifMatch?:number; timeoutMs?:number }
 
 export class LarimiaApi {
@@ -53,7 +56,7 @@ export class LarimiaApi {
 
   me(){return this.request('/customers/me')}
   addresses(){return this.request('/customers/me/addresses')}
-  catalog(market='DO-SDQ'){return this.request(`/catalog?market=${encodeURIComponent(market)}`)}
+  catalog(market='DO-SDQ'){return this.request<{services:CatalogServiceSummary[]}>(`/catalog?market=${encodeURIComponent(market)}`)}
   availability(params:URLSearchParams){return this.request(`/availability?${params}`)}
   quote(body:unknown,options?:CommandOptions){return this.command('/quotes',body,options)}
   createBookingFromQuote(id:string,options?:CommandOptions){return this.command<BookingSummary>(`/bookings/from-quote/${id}`,undefined,options)}
