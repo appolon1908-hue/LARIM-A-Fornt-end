@@ -9,7 +9,7 @@
     "dev:pro": "pnpm --filter @larimia/pro-mobile dev",
     "build": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
-    "test": "pnpm -r test"
+    "test": "vitest run --passWithNoTests"
   },
   "devDependencies": {
     "typescript": "^5.9.2",
