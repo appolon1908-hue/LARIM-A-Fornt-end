@@ -3,7 +3,8 @@ on:
   pull_request:
   push:
     branches: [main]
-
+permissions:
+  contents: read
 jobs:
   verify:
     runs-on: ubuntu-latest
@@ -12,9 +13,9 @@ jobs:
       - uses: pnpm/action-setup@v4
         with: { version: 10 }
       - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: pnpm
+        with: { node-version: 22, cache: pnpm }
+      # The review candidate does not yet include pnpm-lock.yaml. Keep this
+      # non-frozen until the dependency lock is generated and reviewed.
       - run: pnpm install --frozen-lockfile=false
       - run: pnpm typecheck
       - run: pnpm test

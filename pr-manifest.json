@@ -1,0 +1,7 @@
+{
+  "FINAL_STATUS": "PR_REVIEW_CANDIDATE",
+  "REPOSITORY_SCOPE": "FRONTEND_ONLY",
+  "DEPENDS_ON_BACKEND_MIGRATION_HEAD": "0003",
+  "FRONTEND_LOCKFILE": "MISSING - CI uses a non-frozen install until the lockfile is generated and reviewed",
+  "PRODUCTION_VERDICT": "NO-GO until external adapters and certification gates pass"
+}

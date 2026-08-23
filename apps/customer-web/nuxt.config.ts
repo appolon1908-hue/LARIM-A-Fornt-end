@@ -4,6 +4,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL || 'http://localhost:8000/v1',
+      paymentSandboxEnabled: process.env.NUXT_PUBLIC_PAYMENT_SANDBOX_ENABLED === 'true',
     },
   },
   app: {
