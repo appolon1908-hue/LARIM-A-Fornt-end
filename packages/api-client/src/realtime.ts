@@ -18,7 +18,7 @@ export class RealtimeChannel {
     this.socket.onclose = () => {
       if (this.closedByUser) return
       const delay = Math.min(30_000, 1000 * 2 ** this.retries++)
-      window.setTimeout(() => this.connect(), delay)
+      globalThis.setTimeout(() => this.connect(), delay)
     }
   }
 
