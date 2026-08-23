@@ -1,0 +1,1 @@
+<template><section class="page"><h1>Catalog & Pricing</h1><div class="card"><p>Manage market-specific services, durations, kits, policies and price versions.</p><button class="button">Add service</button></div></section></template>

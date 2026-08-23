@@ -1,0 +1,1 @@
+<template><section class="page"><h1>Dispatch</h1><div class="ops-grid"><div class="card"><h2>Unassigned</h2><p>No jobs</p></div><div class="card"><h2>Late risk</h2><p>No alerts</p></div><div class="card"><h2>Active</h2><p>No active visits</p></div></div></section></template>

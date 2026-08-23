@@ -1,0 +1,1 @@
+<template><section class="page"><h1>Safety Desk</h1><div class="grid"><div class="card"><small>S1 Emergency</small><h2>0</h2></div><div class="card"><small>S2 Serious</small><h2>0</h2></div><div class="card"><small>Open incidents</small><h2>0</h2></div></div></section></template>

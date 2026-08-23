@@ -1,0 +1,1 @@
+<template><section class="page"><h1>Finance</h1><div class="grid"><div class="card"><small>Reconciliation breaks</small><h2>0</h2></div><div class="card"><small>Pending payouts</small><h2>0</h2></div><div class="card"><small>Refund queue</small><h2>0</h2></div></div></section></template>

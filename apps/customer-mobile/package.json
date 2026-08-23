@@ -1,0 +1,29 @@
+{
+  "name": "@larimia/customer-mobile",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "typecheck": "vue-tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@ionic/vue": "^8.0.0",
+    "@ionic/vue-router": "^8.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@larimia/api-client": "workspace:*",
+    "@larimia/domain": "workspace:*",
+    "ionicons": "^7.4.0",
+    "vue": "^3.5.0",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.0.0",
+    "@vitejs/plugin-vue": "^6.0.0",
+    "typescript": "^5.9.2",
+    "vite": "^7.0.0",
+    "vitest": "^3.2.4",
+    "vue-tsc": "^3.0.0"
+  }
+}

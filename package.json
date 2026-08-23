@@ -1,0 +1,18 @@
+{
+  "name": "larimia-frontend",
+  "private": true,
+  "packageManager": "pnpm@10.15.0",
+  "scripts": {
+    "dev:customer": "pnpm --filter @larimia/customer-web dev",
+    "dev:ops": "pnpm --filter @larimia/ops-web dev",
+    "dev:customer-mobile": "pnpm --filter @larimia/customer-mobile dev",
+    "dev:pro": "pnpm --filter @larimia/pro-mobile dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

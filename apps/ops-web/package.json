@@ -1,0 +1,24 @@
+{
+  "name": "@larimia/ops-web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nuxt dev",
+    "build": "nuxt build",
+    "typecheck": "nuxt typecheck",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@larimia/api-client": "workspace:*",
+    "@larimia/design-system": "workspace:*",
+    "@larimia/domain": "workspace:*",
+    "@larimia/i18n": "workspace:*",
+    "nuxt": "4.5.2",
+    "vue": "^3.5.0",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2",
+    "vitest": "^3.2.4"
+  }
+}

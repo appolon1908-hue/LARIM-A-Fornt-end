@@ -1,0 +1,1 @@
+<template><section class="page"><h1>Providers</h1><div class="card"><p>Verification · credentials · services · quality · kit readiness · status</p><table><thead><tr><th>Provider</th><th>Status</th><th>Market</th><th>Quality</th></tr></thead><tbody><tr><td colspan="4">No provider records loaded</td></tr></tbody></table></div></section></template>
