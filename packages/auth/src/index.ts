@@ -1,9 +1,26 @@
-type TokenSet={accessToken:string;expiresAt:number;refreshToken?:string}
-let current:TokenSet|null=null
-export function setSession(tokens:TokenSet|null){current=tokens}
-export async function getAccessToken(){
-  if(!current)return null
-  if(Date.now()/1000>=current.expiresAt-30)return null
+export interface AccessTokenSession {
+  accessToken: string
+  expiresAt: number
+}
+
+let current: AccessTokenSession | null = null
+
+export function setSession(session: AccessTokenSession | null): void {
+  current = session
+}
+
+export async function getAccessToken(): Promise<string | null> {
+  if (!current) return null
+  const now = Date.now() / 1000
+  if (now >= current.expiresAt - 30) return null
   return current.accessToken
 }
-export function clearSession(){current=null}
+
+export function hasActiveSession(): boolean {
+  if (!current) return false
+  return Date.now() / 1000 < current.expiresAt - 30
+}
+
+export function clearSession(): void {
+  current = null
+}
