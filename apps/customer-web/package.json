@@ -10,13 +10,15 @@
   },
   "dependencies": {
     "@larimia/api-client": "workspace:*",
+    "@larimia/auth": "workspace:*",
     "@larimia/design-system": "workspace:*",
     "@larimia/domain": "workspace:*",
     "@larimia/i18n": "workspace:*",
+    "@larimia/payment-tokenization": "workspace:*",
+    "@larimia/web-bff": "workspace:*",
     "nuxt": "4.5.2",
     "vue": "^3.5.0",
-    "vue-router": "^4.5.0",
-    "@larimia/auth": "workspace:*"
+    "vue-router": "^4.5.0"
   },
   "devDependencies": {
     "typescript": "^5.9.2",
