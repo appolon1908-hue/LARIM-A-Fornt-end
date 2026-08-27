@@ -1,9 +1,12 @@
 {
   "name": "@larimia/api-client",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
-  "exports": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./realtime": "./src/realtime.ts"
+  },
   "dependencies": {
     "@larimia/domain": "workspace:*"
   }
