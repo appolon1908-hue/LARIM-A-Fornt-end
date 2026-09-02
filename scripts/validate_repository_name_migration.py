@@ -43,7 +43,10 @@ def validate() -> None:
         "status": "PREPARED_NOT_RENAMED",
         "runtime_critical": True,
         "current_runtime_state": "REQUIRES_PRE_CUTOVER_DISCOVERY",
-        "runtime_digest_evidence": "REQUIRED_WHEN_DEPLOYED_OTHERWISE_NOT_APPLICABLE",
+        "runtime_digest_evidence": (
+            "WORKLOAD_SPECIFIC_CURRENT_AND_ROLLBACK_WHEN_DEPLOYED_"
+            "OTHERWISE_NOT_APPLICABLE"
+        ),
         "authority_role": "LARIMIA customer, professional, and operations frontend",
         "account_authority": (
             "appolon1908-hue/documentaions:repository-name-migration.v1.json"
@@ -62,10 +65,11 @@ def validate() -> None:
         "same_repository_id_required_after_cutover",
         "historical_evidence_immutable",
         "all_inventoried_integrations_require_post_rename_readback",
-        "runtime_digest_must_remain_unchanged_when_deployed",
+        "running_artifact_digests_must_be_workload_specific",
+        "rollback_artifact_digests_must_be_workload_specific",
         "absent_runtime_digest_must_be_recorded_as_not_applicable",
-        "success_path_must_restore_freeze_state",
-        "rollback_path_must_restore_freeze_state",
+        "success_path_must_restore_prechange_operation_state",
+        "rollback_path_must_restore_prechange_operation_state",
     ):
         if policy.get(key) is not True:
             fail(f"required fail-closed migration policy is not true: {key}")
@@ -91,16 +95,29 @@ def validate() -> None:
     runbook = RUNBOOK.read_text(encoding="utf-8")
     for required in (
         "POST_RENAME_INTEGRATION_READBACK=PASS",
-        "CURRENT_RUNTIME_STATE=DEPLOYED|NOT_DEPLOYED",
-        "DEPLOYED_IMAGE_DIGEST=<immutable-digest>|N/A",
-        "RUNTIME_DIGEST_UNCHANGED=PASS|N/A",
+        "CURRENT_RUNTIME_STATE=DEPLOYED|PARTIALLY_DEPLOYED|NOT_DEPLOYED",
+        "CUSTOMER_WEB_RUNNING_IMAGE_DIGEST=<immutable-digest>|N/A",
+        "CUSTOMER_WEB_ROLLBACK_IMAGE_DIGEST=<immutable-digest>|N/A",
+        "OPERATIONS_WEB_RUNNING_IMAGE_DIGEST=<immutable-digest>|N/A",
+        "OPERATIONS_WEB_ROLLBACK_IMAGE_DIGEST=<immutable-digest>|N/A",
+        "CUSTOMER_MOBILE_CURRENT_BUILD_DIGEST=<immutable-digest>|N/A",
+        "CUSTOMER_MOBILE_ROLLBACK_BUILD_DIGEST=<immutable-digest>|N/A",
+        "PRO_MOBILE_CURRENT_BUILD_DIGEST=<immutable-digest>|N/A",
+        "PRO_MOBILE_ROLLBACK_BUILD_DIGEST=<immutable-digest>|N/A",
+        "RUNNING_ARTIFACTS_UNCHANGED=PASS|N/A",
+        "ROLLBACK_ARTIFACTS_UNCHANGED=PASS|N/A",
         "MOBILE_BUILD_REFERENCES=PASS|N/A",
-        "MERGES_UNFROZEN=PASS",
-        "WORKFLOW_DISPATCH_UNFROZEN=PASS|N/A",
+        "PRECHANGE_MERGE_STATE=ENABLED|DISABLED",
+        "POSTCHANGE_MERGE_STATE=ENABLED|DISABLED",
+        "MERGE_STATE_RESTORED=PASS",
+        "RELEASE_DISPATCH_STATE_RESTORED=PASS|N/A",
+        "WORKFLOW_DISPATCH_STATE_RESTORED=PASS|N/A",
+        "MOBILE_BUILD_STATE_RESTORED=PASS|N/A",
         "MOBILE_RELEASE_STATE_RESTORED=PASS|N/A",
-        "ROLLBACK_UNFREEZE=PASS|N/A",
-        "Do not leave the repository frozen.",
-        "do not fabricate runtime evidence.",
+        "DEPLOYMENT_DISPATCH_STATE_RESTORED=PASS|N/A",
+        "ROLLBACK_OPERATION_STATE_RESTORED=PASS|N/A",
+        "Do not enable a mechanism that was already disabled",
+        "do not fabricate runtime or rollback evidence.",
         "WORKLOADS_RESTARTED=0",
         "IMAGES_REBUILT=0",
         "MOBILE_RELEASES_PUBLISHED=0",
@@ -110,6 +127,8 @@ def validate() -> None:
     ):
         if required not in runbook:
             fail(f"rename runbook is missing required evidence: {required}")
+    if "UNFROZEN=" in runbook:
+        fail("runbook must restore prior operation state, not require unconditional unfreeze")
 
     setup = SETUP.read_text(encoding="utf-8")
     if f"git clone https://github.com/{CURRENT}.git" not in setup:
