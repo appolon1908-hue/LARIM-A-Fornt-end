@@ -5,6 +5,8 @@
   "target_repository_after_cutover": "appolon1908-hue/LARIM-A-Frontend",
   "status": "PREPARED_NOT_RENAMED",
   "runtime_critical": true,
+  "current_runtime_state": "REQUIRES_PRE_CUTOVER_DISCOVERY",
+  "runtime_digest_evidence": "REQUIRED_WHEN_DEPLOYED_OTHERWISE_NOT_APPLICABLE",
   "authority_role": "LARIMIA customer, professional, and operations frontend",
   "account_authority": "appolon1908-hue/documentaions:repository-name-migration.v1.json",
   "policy": {
@@ -12,7 +14,11 @@
     "target_repository_forbidden_in_automation_before_cutover": true,
     "same_repository_id_required_after_cutover": true,
     "historical_evidence_immutable": true,
-    "runtime_digest_must_remain_unchanged": true,
+    "all_inventoried_integrations_require_post_rename_readback": true,
+    "runtime_digest_must_remain_unchanged_when_deployed": true,
+    "absent_runtime_digest_must_be_recorded_as_not_applicable": true,
+    "success_path_must_restore_freeze_state": true,
+    "rollback_path_must_restore_freeze_state": true,
     "rename_authorizes_deployment": false,
     "rename_authorizes_mobile_release": false,
     "rename_authorizes_provider_effects": false
