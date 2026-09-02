@@ -16,6 +16,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Validate repository-name migration authority
+        run: python3 scripts/validate_repository_name_migration.py
       - name: Install pnpm from packageManager
         uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
