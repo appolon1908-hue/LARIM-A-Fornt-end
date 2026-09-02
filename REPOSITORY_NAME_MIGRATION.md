@@ -6,43 +6,72 @@ CURRENT_FULL_NAME=appolon1908-hue/LARIM-A-Fornt-end
 TARGET_FULL_NAME=appolon1908-hue/LARIM-A-Frontend
 STATUS=PREPARED_NOT_RENAMED
 RUNTIME_CRITICAL=YES
+CURRENT_RUNTIME_STATE=REQUIRES_PRE_CUTOVER_DISCOVERY
 ```
 
 ## Authority decision
 
 The approved target corrects `Fornt-end` while preserving the LARIM-A product identity. This repository remains the frontend authority for Customer Web, Customer Mobile, Pro Mobile, and Operations Web.
 
-The current repository name remains operational until GitHub readback proves repository ID `1343962199` at the target full name with unchanged visibility, history, default branch, protected SHA, issues, pull requests, releases, rulesets, and environments.
+The current repository name remains operational until GitHub readback proves repository ID `1343962199` at the target full name with unchanged visibility, history, default branch and protected SHA, issues, pull requests, releases, rulesets, environments, workflows, packages, mobile-build integrations, and downstream consumers.
 
 ## Dependencies that must be inventoried
 
-Before cutover, capture:
+Before cutover, capture without secret values:
 
-- default-branch SHA and open PR base/head references;
+- default-branch SHA and open pull-request base and head references;
 - branch protection, rulesets, required checks, CODEOWNERS, and Environments;
-- Actions and reusable-workflow references;
-- deploy-key fingerprints, GitHub Apps, and webhooks without secret values;
-- npm/package/container publication names and provenance source URLs;
-- Capacitor/mobile build references and release automation;
-- Middleware and infrastructure authority registries;
+- Actions workflows, reusable workflows, and the exact merge and dispatch state being frozen;
+- deploy-key fingerprints, GitHub Apps, and webhook bindings;
+- npm, package, container, and provenance identities;
+- Capacitor, Android, iOS, signing-workflow, and mobile-release references without signing secrets;
+- Middleware, Grafana, Prometheus, infrastructure, and documentation authority registries;
 - developer, CI, staging, and server Git remotes;
-- deployed frontend image/application versions and rollback targets.
+- current source locks, deployment manifests, and rollback targets.
+
+Discover runtime state immediately before cutover:
+
+- when a reviewed deployment exists, record its immutable application and rollback digests and prove they remain unchanged;
+- when no deployment exists, record `CURRENT_RUNTIME_STATE=NOT_DEPLOYED`, `DEPLOYED_IMAGE_DIGEST=N/A`, and `RUNTIME_DIGEST_UNCHANGED=N/A`;
+- do not fabricate runtime evidence.
 
 ## Controlled cutover
 
-1. Merge alias-awareness into Middleware, Grafana, infrastructure, documentation, and release consumers.
-2. Freeze repository merges, mobile builds, and deployments.
-3. Rename only this repository through an authorized GitHub owner/admin operation.
-4. Require repository ID and exact default SHA continuity.
-5. Update mutable URLs, action references, package metadata, badges, build pipelines, server remotes, and deployment manifests.
-6. Keep dated evidence, release manifests, and source locks unchanged.
-7. Re-run frontend CI, browser/mobile builds, API contract tests, identity tests, package resolution, and deployment preflight.
-8. Verify no LARIMÍA booking, payment, dispatch, notification, or provider capability changed.
-9. Rehearse rename rollback.
+1. Merge stable-ID alias awareness into Middleware, Grafana, Prometheus, infrastructure, documentation, and release consumers.
+2. Freeze repository merges, release dispatches, workflow dispatches, mobile builds, mobile releases, and deployments; record the prior state.
+3. Rename only this repository through an authorized GitHub owner or administrator operation.
+4. Before updating consumers, require repository ID and exact default SHA continuity and verify visibility, history, protection, CODEOWNERS, required checks, issues, pull requests, tags, releases, Actions, reusable workflows, Environments, packages, containers, deploy keys, GitHub Apps, webhooks, Capacitor/mobile build integrations, and downstream consumers.
+5. Stop and roll back if any inventoried integration is missing, weakened, or unresolved.
+6. Update only mutable URLs, action references, package metadata, badges, build pipelines, mobile-build references, server remotes, current source locks, and deployment manifests. Keep dated evidence and release manifests unchanged.
+7. Re-run frontend CI, all four application test suites and builds, browser and mobile builds, API contract tests, identity tests, package resolution, workflow resolution, and deployment preflight.
+8. When a deployment exists, prove its image digest is unchanged. Otherwise preserve the explicit `N/A` runtime result.
+9. Verify no LARIMÍA booking, payment, dispatch, notification, provider capability, mobile release, deployment, or production traffic changed.
+10. Rehearse rename rollback.
+11. After success or validated rollback, restore the exact recorded merge, release-dispatch, workflow-dispatch, mobile-build, mobile-release, and deployment-dispatch state. Do not leave the repository frozen.
+
+## Rollback
+
+Rollback restores the prior slug when safe, restores mutable references and remotes from the checksum-bound pre-change packet, repeats the complete repository, workflow, package, mobile-build, integration, downstream-consumer, and runtime readback, confirms no application or provider capability changed, and then restores the recorded freeze state. A successful rollback must not leave repository or mobile-release operations unintentionally disabled.
 
 Required metadata-only result:
 
 ```text
+POST_RENAME_INTEGRATION_READBACK=PASS
+ACTIONS_REQUIRED_CHECKS=PASS
+PACKAGES_CONTAINERS=PASS|N/A
+DEPLOY_KEYS_APPS_WEBHOOKS=PASS|N/A
+MOBILE_BUILD_REFERENCES=PASS|N/A
+DOWNSTREAM_CONSUMERS=PASS
+CURRENT_RUNTIME_STATE=DEPLOYED|NOT_DEPLOYED
+DEPLOYED_IMAGE_DIGEST=<immutable-digest>|N/A
+RUNTIME_DIGEST_UNCHANGED=PASS|N/A
+MERGES_UNFROZEN=PASS
+RELEASE_DISPATCH_UNFROZEN=PASS|N/A
+WORKFLOW_DISPATCH_UNFROZEN=PASS|N/A
+MOBILE_BUILD_UNFROZEN=PASS|N/A
+MOBILE_RELEASE_STATE_RESTORED=PASS|N/A
+DEPLOYMENT_DISPATCH_RESTORED=PASS|N/A
+ROLLBACK_UNFREEZE=PASS|N/A
 WORKLOADS_RESTARTED=0
 IMAGES_REBUILT=0
 MOBILE_RELEASES_PUBLISHED=0
