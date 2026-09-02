@@ -16,6 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           persist-credentials: false
       - name: Validate repository-name migration authority
         run: python3 scripts/validate_repository_name_migration.py
