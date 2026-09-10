@@ -75,3 +75,17 @@ describe('LarimiaApi', () => {
     })
   })
 })
+
+
+describe('finance response contracts', () => {
+  it.each(['financeReconciliation', 'financePayoutBatches'] as const)(
+    '%s exposes the backend items envelope', async (method) => {
+      vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(
+        JSON.stringify({ items: [{ id: 'record-1' }] }),
+        { status: 200, headers: { 'Content-Type': 'application/json' } },
+      ))
+      const result = await new LarimiaApi('/api/larimia')[method]()
+      expect(result.items).toEqual([{ id: 'record-1' }])
+    },
+  )
+})

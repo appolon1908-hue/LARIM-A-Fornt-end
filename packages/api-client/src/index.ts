@@ -439,10 +439,10 @@ export class LarimiaApi {
   }
 
   financeReconciliation() {
-    return this.request<{ breaks: unknown[] }>('/finance/reconciliation-breaks')
+    return this.request<{ items: unknown[] }>('/finance/reconciliation-breaks')
   }
 
   financePayoutBatches() {
-    return this.request<{ batches: unknown[] }>('/finance/payout-batches')
+    return this.request<{ items: unknown[] }>('/finance/payout-batches')
   }
 }
