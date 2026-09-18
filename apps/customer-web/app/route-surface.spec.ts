@@ -36,7 +36,9 @@ describe('LARIMÍA customer web surface', () => {
   it('keeps strict TypeScript and a server-configurable API boundary', () => {
     const config = read('nuxt.config.ts')
 
-    expect(config).toContain("process.env.NUXT_PUBLIC_API_BASE_URL")
+    expect(config).toContain("process.env.NUXT_API_BASE_URL")
+    expect(config).toContain("apiBaseUrl: '/api/larimia'")
+    expect(config).not.toContain("process.env.NUXT_PUBLIC_API_BASE_URL")
     expect(config).toContain("typescript: { strict: true }")
     expect(config).toContain("width=device-width, initial-scale=1")
   })

@@ -1,0 +1,9 @@
+{
+  "name": "@larimia/web-bff",
+  "private": true,
+  "type": "module",
+  "exports": "./src/index.ts",
+  "dependencies": {
+    "h3": "^1.15.0"
+  }
+}
