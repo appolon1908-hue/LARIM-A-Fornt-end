@@ -3,7 +3,7 @@ name: frontend-ci
 on:
   pull_request:
   push:
-    branches: [main]
+    branches: [main, development, testing, staging, production, 'section/**', 'subsection/**']
 
 permissions:
   contents: read
@@ -11,13 +11,20 @@ permissions:
 
 jobs:
   verify:
+    env:
+      EXPECTED_SHA: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.sha }}
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ env.EXPECTED_SHA }}
           fetch-depth: 0
           persist-credentials: false
+      - name: Prove exact source identity
+        run: |
+          test "$(git rev-parse HEAD)" = "$EXPECTED_SHA"
+          test -z "$(git status --porcelain)"
       - name: Validate repository-name migration authority
         run: python3 scripts/validate_repository_name_migration.py
       - name: Install pnpm from packageManager
