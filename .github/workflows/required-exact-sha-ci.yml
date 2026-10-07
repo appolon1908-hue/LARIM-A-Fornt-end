@@ -69,6 +69,24 @@ jobs:
           fi
           git fsck --no-progress
 
+      - name: Set up Node 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "22"
+
+      - name: Run Larimia frontend project gates
+        shell: bash
+        env:
+          CI: "true"
+        run: |
+          set -euo pipefail
+          python3 scripts/validate_repository_name_migration.py
+          corepack enable
+          pnpm install --frozen-lockfile=false
+          pnpm typecheck
+          pnpm test
+          pnpm build
+
       - name: Record exact-SHA evidence in runner-controlled storage
         shell: bash
         run: |
