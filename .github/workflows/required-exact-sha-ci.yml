@@ -89,6 +89,25 @@ jobs:
           pnpm test
           pnpm build
 
+
+      - name: Install pnpm from packageManager
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: "22"
+
+      - name: Run Larimia frontend project checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/validate_repository_name_migration.py
+          pnpm install --frozen-lockfile=false
+          pnpm typecheck
+          pnpm test
+          pnpm build
+
       - name: Record exact-SHA evidence in runner-controlled storage
         shell: bash
         run: |
